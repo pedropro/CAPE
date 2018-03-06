@@ -13,6 +13,7 @@ RGBD Sequences are available: [Here](https://drive.google.com/file/d/1v1gNg6JTS3
 Download the .zip file and unzip it into ``./Data``
 
 ## Ubuntu Instructions
+Tested with Ubuntu 14.04
 
 To compile, inside the directory ``./CAPE`` type:
 ```
