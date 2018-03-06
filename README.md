@@ -27,7 +27,7 @@ To run the executable, type:
 ```./cape_offline 20 <sequence_name>```
 
 where the first argument is the cell size in pixels
-and <sequence_name> is your folder 
+and <sequence_name> is a folder:
 ``./Data/<sequence_name>``
 that contains the image and calibration files
 
