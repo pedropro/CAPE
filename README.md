@@ -8,7 +8,7 @@ Cylinder and Plane Extraction from Depth Cameras
 
 ## Data
 
-RGBD Sequences w/ cylinders are available for testing: [Here](https://drive.google.com/drive/folders/1CaVVLF7AQUlsOwFWrx-Fm7zB6wueQBE3?usp=sharing)
+RGBD Sequences w/ cylinders are available for testing: [Dataset](https://drive.google.com/drive/folders/1CaVVLF7AQUlsOwFWrx-Fm7zB6wueQBE3?usp=sharing)
 
 Download a .zip file and unzip it into ``./Data``
 
