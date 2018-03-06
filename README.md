@@ -28,7 +28,7 @@ To run the executable, type:
 
 where the first argument is the cell size in pixels
 and <sequence_name> is your folder 
-``./Data/<sequence_name>``.
+``./Data/<sequence_name>``
 that contains the image and calibration files
 
 ## Windows Instructions
