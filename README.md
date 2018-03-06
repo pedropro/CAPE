@@ -15,7 +15,7 @@ Download a .zip file and unzip it into ``./Data``
 ## Ubuntu Instructions
 Tested with Ubuntu 14.04
 
-To compile, inside the directory ``./CAPE`` type:
+To compile, inside the directory ``./CAPE``, type:
 ```
 mkdir build
 cd build
