@@ -10,7 +10,7 @@ Cylinder and Plane Extraction from Depth Cameras
 
 RGBD Sequences are available: [Here](https://drive.google.com/drive/folders/1CaVVLF7AQUlsOwFWrx-Fm7zB6wueQBE3?usp=sharing)
 
-Download the .zip file and unzip it into ``./Data``
+Download a .zip file and unzip it into ``./Data``
 
 ## Ubuntu Instructions
 Tested with Ubuntu 14.04
