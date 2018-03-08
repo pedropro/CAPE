@@ -1,6 +1,10 @@
 # CAPE
 Cylinder and Plane Extraction from Depth Cameras
 
+Paper:
+Fast Cylinder and Plane Extraction from Depth Cameras for Visual Odometry
+https://arxiv.org/abs/1803.02380
+
 ## Dependencies
 
 * OpenCV
