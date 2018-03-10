@@ -1,9 +1,11 @@
 # CAPE
 Cylinder and Plane Extraction from Depth Cameras
 
-Paper:
+Implementation of the method proposed in:
 Fast Cylinder and Plane Extraction from Depth Cameras for Visual Odometry,
 https://arxiv.org/abs/1803.02380
+
+Note: The parameters are fine-tuned for detecting large surfaces with Kinect 1 and Structure sensor for VO. For other applications, these may need to be modified.
 
 ## Dependencies
 
