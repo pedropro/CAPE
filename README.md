@@ -1,7 +1,7 @@
 # CAPE
 Cylinder and Plane Extraction from Depth Cameras
 
-Implementation of the method proposed in:
+Implementation of the method proposed in:  
 Fast Cylinder and Plane Extraction from Depth Cameras for Visual Odometry,
 https://arxiv.org/abs/1803.02380
 
