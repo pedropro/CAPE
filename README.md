@@ -36,6 +36,7 @@ where the first argument is the cell size in pixels (recommended 20)
 and the second argument is a folder stored in:``./Data``
 that contains the image and calibration files. 
 For example, if the target sequence is the 'tunnel' (assuming this was downloaded as specified above),run:
+
 ```./cape_offline 20 tunnel```
 
 ## Windows Instructions
