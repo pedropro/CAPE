@@ -28,14 +28,15 @@ cd build
 cmake ..
 make
 ```
-To run the executable, type:
+To run the executable, use the following format:
 
-```./cape_offline 20 <sequence_name>```
+```./cape_offline <cell_size> <sequence_name>```
 
 where the first argument is the cell size in pixels (recommended 20)
-and <sequence_name> is a folder:
-``./Data/<sequence_name>``
-that contains the image and calibration files
+and the second argument is a folder stored in:``./Data``
+that contains the image and calibration files. 
+For example, if the target sequence is the 'tunnel' (assuming this was downloaded as specified above),run:
+```./cape_offline 20 tunnel```
 
 ## Windows Instructions
 
