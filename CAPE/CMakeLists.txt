@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(OMG)
+project(CAPE)
 
 find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)

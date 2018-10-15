@@ -25,7 +25,7 @@ public:
 	vector<Eigen::Vector3f> P1;
 	vector<Eigen::Vector3f> P2;
 	vector<float> P1P2_norm;
-
+    CylinderSeg(){}
 	CylinderSeg(vector<PlaneSeg*> & Grid, bool * activated_mask, int nr_cells_activated);
 	float distance(Eigen::Vector3f & point, int segment_id);
 	~CylinderSeg(void);

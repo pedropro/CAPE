@@ -44,7 +44,7 @@ CAPE::CAPE(int depth_height, int depth_width, int cell_width, int cell_height, b
 	mask_cross_kernel.at<uchar>(0,2) = 0; mask_cross_kernel.at<uchar>(2,0) = 0;
 }
 
-void CAPE::process(Eigen::MatrixXf & cloud_array, int & nr_planes_final, int & nr_cylinders_final,  cv::Mat & seg_out ){
+void CAPE::process(Eigen::MatrixXf & cloud_array, int & nr_planes_final, int & nr_cylinders_final,  cv::Mat & seg_out, vector<PlaneSeg> & plane_segments_final, vector<CylinderSeg> & cylinder_segments_final){
 
 	int nr_horizontal_cells = depth_width/cell_width;
 	int nr_vertical_cells = depth_height/cell_height;
@@ -178,7 +178,7 @@ void CAPE::process(Eigen::MatrixXf & cloud_array, int & nr_planes_final, int & n
 			}
 		}else{
 			if(cylinder_detection && nr_cells_activated>5){
-				// It is an extrusion
+                // It is an extrusion
 				CylinderSeg cy(Grid, activation_map, nr_cells_activated);
 				cylinder_segments.push_back(cy);
 				// Fit planes to subsegments
@@ -252,7 +252,7 @@ void CAPE::process(Eigen::MatrixXf & cloud_array, int & nr_planes_final, int & n
 	}
 
 	/*------------------------------- Refine plane boundaries -------------------------------*/
-	vector<PlaneSeg> plane_segments_joint;
+    //vector<PlaneSeg> plane_segments_joint;
 	for(int i=0; i<nr_planes;i++){
 
 		if(i!=plane_merge_labels[i])
@@ -276,14 +276,14 @@ void CAPE::process(Eigen::MatrixXf & cloud_array, int & nr_planes_final, int & n
 			continue;
 		}
 
-		plane_segments_joint.push_back(plane_segments[i]);
+        plane_segments_final.push_back(plane_segments[i]);
 
 		// Dilate to obtain borders
 		cv::dilate(mask,mask_dilated,mask_square_kernel);
 		mask_diff = mask_dilated-mask_eroded;
 
 		int stacked_cell_id = 0;
-		uchar plane_nr = (unsigned char)plane_segments_joint.size();
+        uchar plane_nr = (unsigned char)plane_segments_final.size();
 		float nx = (float)plane_segments[i].normal[0]; float ny = (float)plane_segments[i].normal[1];
 		float nz = (float)plane_segments[i].normal[2]; float d = (float)plane_segments[i].d;
 		unsigned char * row_ptr;
@@ -318,7 +318,7 @@ void CAPE::process(Eigen::MatrixXf & cloud_array, int & nr_planes_final, int & n
 			}
 		}
 	}
-	nr_planes_final = plane_segments_joint.size();
+    nr_planes_final = plane_segments_final.size();
 
 	/*------------------------------ Refine cylinder boundaries -----------------------------*/
 	nr_cylinders_final = 0;
@@ -430,6 +430,20 @@ void CAPE::process(Eigen::MatrixXf & cloud_array, int & nr_planes_final, int & n
 			}
 		}
 	}
+
+    for(int i=0;i<nr_cylinders;i++){
+        int reg_id = cylinder2region_map[i].first;
+        if (reg_id>-1){
+            int sub_reg_id = cylinder2region_map[i].second;
+            CylinderSeg cy;
+            cy.radii.push_back(cylinder_segments[reg_id].radii[sub_reg_id]);
+            cy.centers.push_back(cylinder_segments[reg_id].centers[sub_reg_id]);
+            copy(cylinder_segments[reg_id].axis, cylinder_segments[reg_id].axis+3, cy.axis);
+            cout<<cylinder_segments[reg_id].axis[2]<<endl;
+            cylinder_segments_final.push_back(cy);
+        }
+    }
+
 
 	// Cleaning data
 	stacked_cell_id=0;

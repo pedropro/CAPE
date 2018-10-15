@@ -182,7 +182,7 @@ int main(int argc, char ** argv){
 		cv::Vec3b color;
 		color[0]=rand()%255;
 		color[1]=rand()%255;
-		color[2]=rand()%255;
+        color[2]=rand()%255;
 		color_code.push_back(color);
 	}
 
@@ -236,13 +236,30 @@ int main(int argc, char ** argv){
 		cv::Mat_<uchar> seg_output = cv::Mat_<uchar>(height,width,uchar(0));
 		
 		// Run CAPE
-		int nr_planes, nr_cylinders;
+        int nr_planes, nr_cylinders;
+        vector<PlaneSeg> plane_params;
+        vector<CylinderSeg> cylinder_params;
 		double t1 = cv::getTickCount();
 		organizePointCloudByCell(cloud_array, cloud_array_organized, cell_map);
-		plane_detector->process(cloud_array_organized, nr_planes, nr_cylinders, seg_output);
+        plane_detector->process(cloud_array_organized, nr_planes, nr_cylinders, seg_output, plane_params, cylinder_params);
 		double t2 = cv::getTickCount();
 		double time_elapsed = (t2-t1)/(double)cv::getTickFrequency();
 		cout<<"Total time elapsed: "<<time_elapsed<<endl;
+
+        /* Uncomment this block to print model params
+        for(int p_id=0; p_id<nr_planes;p_id++){
+            cout<<"[Plane #"<<p_id<<"] with ";
+            cout<<"normal: ("<<plane_params[p_id].normal[0]<<" "<<plane_params[p_id].normal[1]<<" "<<plane_params[p_id].normal[2]<<"), ";
+            cout<<"d: "<<plane_params[p_id].d<<endl;
+        }
+
+        for(int c_id=0; c_id<nr_cylinders;c_id++){
+            cout<<"[Cylinder #"<<c_id<<"] with ";
+            cout<<"axis: ("<<cylinder_params[c_id].axis[0]<<" "<<cylinder_params[c_id].axis[1]<<" "<<cylinder_params[c_id].axis[2]<<"), ";
+            cout<<"center: ("<<cylinder_params[c_id].centers[0].transpose()<<"), ";
+            cout<<"radius: "<<cylinder_params[c_id].radii[0]<<endl;
+        }
+        */
 
 		// Map segments with color codes and overlap segmented image w/ RGB
 		uchar * sCode;

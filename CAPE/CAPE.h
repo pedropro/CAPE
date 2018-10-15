@@ -5,6 +5,8 @@
 #pragma once
 #include <math.h>
 #include <iostream>
+#include <iterator>
+#include <algorithm>
 #include "PlaneSeg.h"
 #include "CylinderSeg.h"
 #include "Histogram.h"
@@ -43,7 +45,7 @@ private:
 	bool* unassigned_mask;
 public:
 	CAPE(int depth_height, int depth_width, int cell_width, int cell_height, bool cylinder_detection, float min_cos_angle_4_merge = 0.97814, float max_merge_dist = 900);
-	void process(Eigen::MatrixXf & cloud_array, int & nr_planes, int & nr_cylinders, cv::Mat & seg_output);
+    void process(Eigen::MatrixXf & cloud_array, int & nr_planes, int & nr_cylinders, cv::Mat & seg_output, vector<PlaneSeg> & plane_segments_final, vector<CylinderSeg> & cylinder_segments_final);
 	void RegionGrowing(unsigned short width, unsigned short height, bool* input, bool* output, vector<PlaneSeg*> & Grid, vector<float> & cell_dist_tols, unsigned short x, unsigned short y, double * normal, double d);
 	void getConnectedComponents(cv::Mat & segment_map, MatrixXb & planes_association_matrix);
 	~CAPE(void);
