@@ -26,3 +26,38 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 # demo executable
 add_executable(cape_offline run_cape_offline.cpp)
 target_link_libraries(cape_offline ${PROJECT_NAME})
+
+
+################################
+## INSTALLATION
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY INTERFACE_LINK_DIRECTORIES ${OpenCV_LIBRARY_DIR})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_INSTALL_LIBDIR}
+)
+
+# install library
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+# install headers
+set(PUBLIC_HEADERS
+    "CAPE.h"
+    "CylinderSeg.h"
+    "Histogram.h"
+    "Params.h"
+    "PlaneSeg.h"
+)
+
+install(FILES ${PUBLIC_HEADERS}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+# create a CMake configuration
+install(EXPORT ${PROJECT_NAME}
+    DESTINATION share/${PROJECT_NAME}/cmake
+    FILE ${PROJECT_NAME}Config.cmake
+)
