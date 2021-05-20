@@ -1,0 +1,19 @@
+<package format="2">
+  <name>cape</name>
+  <version>0.0.1</version>
+  <description>
+  Cylinder and Plane Extraction from Depth Cameras
+  </description>
+  <maintainer email="Christian.Rauch@ed.ac.uk">Christian Rauch</maintainer>
+  <author email="pproenxa@gmail.com">Pedro F. Proença</author>
+  <license>MIT</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <depend>libopencv-dev</depend>
+  <depend>eigen</depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
